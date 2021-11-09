@@ -1,0 +1,28 @@
+{% extends "../sub_base.html" %}
+
+{% block jumbotron %}
+    <!-- Jumbotron -->
+    <div class="jumbotron">
+      <h1>Imagen de Usuario</h1>
+      <p class="lead">Aqui debes subir la imagen de tu usuario.</p>
+
+    </div>
+{% endblock %}
+
+
+
+{% block content %}
+
+    {% if message %}
+      <div class='alert alert-info'>
+        {{ message }}
+      </div>
+    {% endif %}
+
+    <h3>Upload a picture</h3>
+    <form  role="form"  enctype="multipart/form-data" action="" method="POST" id="upload-image-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+    </form>
+
+{% endblock %}

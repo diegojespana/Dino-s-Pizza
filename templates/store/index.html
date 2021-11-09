@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}DINO's Pizza{% endblock %}
+{% block content %}
+
+<div class="container">
+  <div class="container">
+    <div class="row">
+      <div class="album py-5">
+        <div class="pb-3">
+          <h1 class="h3">Bienvenido a DINO's Pizza</h1>
+        </div>
+        {% if not products %}
+        <div class="col-12">No hay ningún producto disponible</div>
+        {% else %}
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+          {% for product in products %}
+          <div class="col">
+            <div class="card border-0">
+              {% for image in product.product_image.all %}
+              {% if image.is_feature%}
+                <img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image" src="{{ productos.image.url }}"
+                  alt="{{ image.image.alt_text }}">
+              {% endif %}
+              {% endfor %}
+              <div class="card-body px-0">
+                <p class="card-text">
+                  <a class="text-dark text-decoration-none"
+                    href="{{ product.get_absolute_url }}">{{ product.title|slice:":50" }}...</a>
+                </p>
+                <div class="fw-bold">Q{{product.regular_price}}</div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+    <footer class="container py-5 footer">
+     <div class="thumbnail"><p style="text-align:center;">
+                {% load static %} <img src="{% static "store/media/creadores.png" %}" width="300"
+     height="200" alt="home" />
+                <div class="caption">
+                    DINO's Pizza nace en 2021 a partir del gusto de 3 amigos, Dino, Lorenzo y Diego, por la pizza.
+                    Al recorrer Guatemala en busca de una pizza que realmente los dejara satisfechos y no encontrar
+                    ninguna, decidieron crear sus propias recetas, utilizando los mejores ingredientes y buscando la
+                    originalidad en cada una de sus pizzas.
+                </div>
+       </p>
+     </div>
+  </footer>
+
+  {% endblock %}

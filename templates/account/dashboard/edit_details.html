@@ -1,0 +1,40 @@
+{% extends "../sub_base.html" %}
+{% block title %}Edit Profile{% endblock %}
+{% block sub_content %}
+
+<div class="col-6 mx-auto">
+<form class="account-form" method="post" enctype="multipart/form-data">
+    {% if user_form.is_valid and profile_form.is_valid  %}
+    <div class="alert alert-primary" role="alert">
+        Información actualizada correctamente!
+    </div>
+    <p class="small text-center pt-0">
+        <a href="{% url "account:dashboard" %}">Home</a>
+    </p>
+    {%else%}
+    <h3>Edita tu información</h3>
+    <p>Puedes editar tu información utilizando la siguiente forma:</p>
+    {% endif %}
+    {% if form.errors %}
+    <div class="alert alert-primary" role="alert">
+        Error: Por favor intenta de nuevo!
+    </div>
+    {% endif %}
+    {% csrf_token %}
+    <label class="small font-weight-bold">{{ user_form.email.label}}</label>
+    {{ user_form.email }}
+    <label class="small font-weight-bold">{{ user_form.first_name.label}}</label>
+    {{ user_form.first_name }}
+    <button class="btn btn-primary btn-block py-2 mb-4 mt-5 fw-bold w-100" type="submit" value="Save changes">Guardas
+        Changes</button>
+    <hr class="mb-3">
+</form>
+<form class="account-form" action="{% url "account:delete_user" %}" method="post">
+    {% csrf_token %}
+    <p class=" h3 pt-4 font-weight-bold">Borrar Cuenta</p>
+    <p>¿Estás seguro que deseas eliminar tu cuenta? Te extrañaremos.</p>
+    <button type="submit" role="button" class="btn btn-danger btn-block py-2 mb-4 mt-5 fw-bold w-100">Borrar Cuenta</button>
+</form>
+</div>
+
+{% endblock %}

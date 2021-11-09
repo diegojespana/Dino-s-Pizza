@@ -1,0 +1,20 @@
+{% extends "../base.html" %}
+{% load static %}
+{% block title %}Payment Successful{%endblock %}
+{% block content %}
+
+<div class="container">
+  <div class="col-12">
+    <h1 class="h2">Pago Recibido</h1>
+  </div>
+  <div class="col-12">
+    <p>Resumen de tu orden</p>
+  </div>
+  <hr />
+  <div class="col-12">
+    <p>Ver todas tus <a href="{% url 'account:user_orders'%}">ordenes</a></p>
+  </div>
+</div>
+
+
+{% endblock %}
